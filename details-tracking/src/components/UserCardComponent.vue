@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div id="user-card" class="box-border h-80 w-80 border-2 rounded-md border-border bg-white flex flex-col pb-10 hover:shadow-xl">
+  <div id="user-card" class="box-border h-80 w-full border-2 rounded-md border-border bg-white flex flex-col py-4 hover:shadow-xl">
     
     <div id="user" class="w-full flex h-2/5 items-center">
 

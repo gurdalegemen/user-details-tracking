@@ -3,9 +3,9 @@
 </script>
 
 <template>
-    <div class="h-screen w-screen pt-10">
-        <div class="flex flex-col">
-            <hr class="mx-10"/>
+    <div>
+        <div class="flex flex-col h-20 w-full px-5">
+            <hr class="border-solid border-gray px-10"/>
             <div class="flex gap-x-2 justify-center items-center mt-5">
                 <Logo/>
                 <span class="font-semibold text-xl">N2Mobil</span>

@@ -5,12 +5,17 @@
 </script>
 
 <template>
-    <div class="bg-border">
-        <div class="h-10 flex items-center">
-            <Tab/>
+    <div class="pt-8 h-full flex flex-col justify-between">
+        <div class="bg-white">
+            <div class="h-10 items-center">
+                <Tab/>
+            </div>
         </div>
-        <!-- <Footer/> -->
+        <div>
+            <Footer/>
+        </div>
     </div>
+    
 </template>
 
 <style scoped>
