@@ -1,14 +1,14 @@
 <script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
+// defineProps({
+//   msg: {
+//     type: String,
+//     required: true
+//   }
+// })
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold underline">
+  <h1 class="text-3xl font-bold underline text-primary">
     Hello world!
   </h1>
 </template>
