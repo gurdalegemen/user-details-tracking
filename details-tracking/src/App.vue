@@ -1,12 +1,10 @@
 <script setup>
-  import ExComp from './components/ExampleComponent.vue'
-// import HelloWorld from './components/HelloWorld.vue'
-// import TheWelcome from './components/TheWelcome.vue'
+  import Card from './components/UserCardComponent.vue';
 </script>
 
 <template>
   <main>
-    <ExComp/>
+    <Card/>
   </main>
 </template>
 
