@@ -10,6 +10,7 @@ module.exports = {
       'subtitle': '#5C6672',
       'title': '#26303E',
       'border': '#D8D9DD',
+      'white': '#FFFFFF'
     },
 
     fontFamily: {

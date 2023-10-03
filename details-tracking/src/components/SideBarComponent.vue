@@ -1,10 +1,15 @@
 <script setup>
  import Footer from './FooterComponent.vue'
+ import Tab from './TabComponent.vue'
+
 </script>
 
 <template>
     <div class="bg-border">
-        <Footer/>
+        <div class="h-10 flex items-center">
+            <Tab/>
+        </div>
+        <!-- <Footer/> -->
     </div>
 </template>
 
