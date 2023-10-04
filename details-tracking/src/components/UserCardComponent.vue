@@ -6,23 +6,29 @@
   export default {
     props: {
       user: Object,
+      id: Number,
     },
     components:{
       Pin,
       Company,
       Website,
     },
+    methods: {
+      navigateToOtherPage() {
+        this.$router.push(`/todos/${this.id}`);
+      }
+    },
   };
 
 </script>
 
 <template>
-  <div id="user-card" class="box-border h-80 w-full border-2 rounded-md border-border bg-white flex flex-col py-4 hover:shadow-xl">
+  <div @click="navigateToOtherPage" id="user-card" class="box-border h-80 w-full border-2 rounded-md border-border bg-white flex flex-col py-4 hover:shadow-xl">
     
     <div id="user" class="w-full flex h-2/5 items-center">
 
       <div id="user-picture" class="w-2/5 flex justify-center">
-        <img class="w-30 h-30 rounded-full" src="https://randomuser.me/api/portraits/med/women/91.jpg" alt="">
+        <img class="w-30 h-30 rounded-full" src="https://randomuser.me/api/portraits/med/men/11.jpg" alt="">
       </div>
 
       <div id="user-details" class="w-3/5">
