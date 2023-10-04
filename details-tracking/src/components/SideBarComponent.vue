@@ -5,8 +5,8 @@
 </script>
 
 <template>
-    <div class="pt-8 h-full flex flex-col justify-between">
-        <div class="bg-white">
+    <div class="pt-10 h-full flex flex-col justify-between">
+        <div class="bg-border">
             <div class="h-10 items-center">
                 <Tab/>
             </div>

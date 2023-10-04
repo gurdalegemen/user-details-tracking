@@ -2,11 +2,11 @@
   import Pin from './icons/Pin.vue'
   import Company from './icons/Company.vue'
   import Website from './icons/Website.vue'
+  import { ref, onMounted} from 'vue'
 
   export default {
     props: {
       user: Object,
-      id: Number,
     },
     components:{
       Pin,
@@ -15,7 +15,8 @@
     },
     methods: {
       navigateToOtherPage() {
-        this.$router.push(`/todos/${this.id}`);
+        this.$router.push('/todos');
+        // console.log(this.id); //id
       }
     },
   };
