@@ -1,7 +1,18 @@
-<script setup>
+<script>
   import Pin from './icons/Pin.vue'
   import Company from './icons/Company.vue'
   import Website from './icons/Website.vue'
+
+  export default {
+    props: {
+      user: Object,
+    },
+    components:{
+      Pin,
+      Company,
+      Website,
+    },
+  };
 
 </script>
 
@@ -17,22 +28,22 @@
       <div id="user-details" class="w-3/5">
 
         <div id="user-name" class="font-bold">
-          Jane Doe
+          {{user.name}}
         </div>
 
         <div id="user-email" class="text-sm font-light">
-          jane@lorem.com
+          {{user.email}}
         </div>
 
         <div id="user-phone" class="text-sm font-light">
-          +90 000 000 00 00
+          {{user.phone}}
         </div>
 
       </div>
 
     </div>
 
-    <div id="user-info" class="w-full h-3/5 pl-10 pr-20 flex flex-col gap-y-2">
+    <div id="user-info" class="w-full h-3/5 px-10 mb-2 flex flex-col gap-y-2">
 
       <div id="user-location">
         <div class="font-bold flex flex-row gap-x-2">
@@ -40,7 +51,7 @@
           Location
         </div>
         <div class="font-light text-sm ">
-          Timko Sokak no:2 Yeni Mahalle / Ankara
+          {{user.address.city}}, {{user.address.street}}, {{user.address.suite}},{{user.address.zipcode}}
         </div>
       </div>
 
@@ -50,7 +61,7 @@
           Company
         </div>
         <div class="font-light text-sm">
-          Timko Sokak no:2 Yeni Mahalle / Ankara
+          {{user.company.name}}
         </div>
       </div>
 
@@ -60,7 +71,7 @@
           Website
         </div>
         <div class="font-light text-sm">
-          jane.doe.com
+          {{user.website}}
         </div>
       </div>
 
