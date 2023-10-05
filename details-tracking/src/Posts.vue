@@ -2,14 +2,12 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import SideBar from "./components/SideBarComponent.vue";
-import CheckBox from "./components/CheckBoxComponent.vue";
 import ArrowLeft from "./components/icons/Left.vue";
 import { useStore } from "vuex";
 
 export default {
   components: {
     SideBar,
-    CheckBox,
     ArrowLeft,
   },
   methods: {
@@ -20,7 +18,7 @@ export default {
   setup() {
     const store = useStore();
     const user_ = ref(null);
-    const todos_ = ref(null);
+    const posts_ = ref(null);
     let userIdFromStore = ref(null);
 
     onMounted(() => {
@@ -40,10 +38,10 @@ export default {
         // get user's todos
         axios
           .get(
-            `https://jsonplaceholder.typicode.com/users/${userIdFromStore}/todos`
+            `https://jsonplaceholder.typicode.com/users/${userIdFromStore}/posts`
           )
           .then((response) => {
-            todos_.value = response.data;
+            posts_.value = response.data;
           })
           .catch((error) => {
             console.error("Data can not fetch:", error);
@@ -53,7 +51,7 @@ export default {
 
     return {
       user_,
-      todos_,
+      posts_,
       userIdFromStore,
     };
   },
@@ -95,7 +93,7 @@ export default {
         Go Home
       </div>
       <div class="container flex flex-col h-4/5 px-4 overflow-y-auto">
-        <CheckBox v-for="todo_ in todos_" :key="todo_.id" :todo="todo_" />
+        <!-- <CheckBox v-for="todo_ in todos_" :key="todo_.id" :todo="todo_" /> -->
       </div>
     </div>
   </div>

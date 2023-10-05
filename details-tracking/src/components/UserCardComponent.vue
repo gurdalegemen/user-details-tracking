@@ -2,7 +2,6 @@
   import Pin from './icons/Pin.vue'
   import Company from './icons/Company.vue'
   import Website from './icons/Website.vue'
-  import { useStore } from 'vuex';
 
   export default {
     props: {

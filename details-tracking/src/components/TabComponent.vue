@@ -3,7 +3,9 @@
     import TodoIcon from './icons/Todo.vue'
     import PostIcon from './icons/Post.vue'
     import AlbumIcon from './icons/Album.vue'
-    import { ref } from 'vue';
+    import { ref, onMounted } from "vue";
+    import { useStore } from 'vuex';
+import router from '../router';
 
 
     export default {
@@ -14,12 +16,38 @@
         const showPostsButton = ref(true);
         const showAlbumsButton = ref(true);
 
+        const store = useStore();
+        let userIdFromStore = ref(null);
+        
+        onMounted(() => {
+            userIdFromStore = store.getters.getUserId
+
+        })
+        function navigateToTodos(){
+            // this.$store.dispatch('setUserId', userIdFromStore);
+            // this.$router.push({ name: "Posts", params: { id: userIdFromStore }});
+            router.push({ name: "Todos", params: { id: userIdFromStore }});
+        }
+        function navigateToAlbums(){
+            // this.$store.dispatch('setUserId', userIdFromStore);
+            // this.$router.push({ name: "Posts", params: { id: userIdFromStore }});
+            router.push({ name: "Albums", params: { id: userIdFromStore }});
+        }
+        function navigateToPosts(){
+            // this.$store.dispatch('setUserId', userIdFromStore);
+            // this.$router.push({ name: "Posts", params: { id: userIdFromStore }});
+            router.push({ name: "Posts", params: { id: userIdFromStore }});
+        }
 
         return {
         showUsersButton,
         showTodosButton,
         showPostsButton,
         showAlbumsButton,
+        userIdFromStore,
+        navigateToTodos,
+        navigateToPosts,
+        navigateToAlbums,
         };
     },
     components: {
@@ -29,7 +57,6 @@
         AlbumIcon,
     },
     methods:{
-        
     },
 };
 </script>
@@ -45,21 +72,21 @@
                 <span class="border-none text-primary">Users</span>
             </button>
         </div>
-        <div :style="{ backgroundColor: $route.name === 'Todos' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center pl-8">
+        <div @click="navigateToTodos" :style="{ backgroundColor: $route.name === 'Todos' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center pl-8">
             <button v-if="$route.meta.showTodosButton" :style="{ backgroundColor: $route.name === 'Todos' ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <TodoIcon/>
                 <span class="border-none text-primary">ToDo</span>
             </button>
         </div>
-        <div :style="{ backgroundColor: $route.name === 'Posts' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center pl-8">
+        <div @click="navigateToPosts" :style="{ backgroundColor: $route.name === 'Posts' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center pl-8">
             <button v-if="$route.meta.showPostsButton" :style="{ backgroundColor: $route.name === 'Posts' ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <PostIcon/>
                 <span class="border-none text-primary">Posts</span>
             </button>
         </div>
-        <div :style="{ backgroundColor: $route.name === 'Albums' ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 w-full items-center pl-8">
+        <div @click="navigateToAlbums" :style="{ backgroundColor: $route.name === 'Albums' ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 w-full items-center pl-8">
             <button v-if="$route.meta.showAlbumsButton" :style="{ backgroundColor: $route.name === 'Albums' ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <AlbumIcon/>
