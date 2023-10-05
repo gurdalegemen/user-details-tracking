@@ -15,8 +15,7 @@
     },
     methods: {
       navigateToOtherPage() {
-        this.$router.push('/todos');
-        // console.log(this.id); //id
+        this.$router.push({ name: 'Todos', params: { id: this.user.id }});
       }
     },
   };
