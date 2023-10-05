@@ -1,97 +1,106 @@
 <script>
-import { useRouter } from 'vue-router';
-import { ref, onMounted} from 'vue';
-import axios from 'axios';
-import SideBar from './components/SideBarComponent.vue';
-import CheckBox from './components/CheckBoxComponent.vue';
-import ArrowLeft from './components/icons/Left.vue';
-
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import SideBar from "./components/SideBarComponent.vue";
+import CheckBox from "./components/CheckBoxComponent.vue";
+import ArrowLeft from "./components/icons/Left.vue";
+import { useStore } from "vuex";
 
 export default {
-    components: {
-      SideBar,
-      CheckBox,
-      ArrowLeft,
+  components: {
+    SideBar,
+    CheckBox,
+    ArrowLeft,
+  },
+  methods: {
+    navigateToOtherPage() {
+      this.$router.push({ name: "Home" });
     },
-    methods: {
-      navigateToOtherPage() {
-        this.$router.push({ name: 'Home'});
-      }
-    },
-    setup() {
-      const router = useRouter();
-      const userId = router.currentRoute.value.params.id;
-      const user_ = ref(null);
-      const todos_ = ref(null);
+  },
+  setup() {
+    const store = useStore();
+    const user_ = ref(null);
+    const todos_ = ref(null);
+    let userIdFromStore = ref(null);
 
-      onMounted(() => {
-        if (userId) {
-           // get user
-          axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
-            .then(response => {
-              user_.value = response.data;
-            })
-            .catch(error => {
-              console.error('Data can not fetch:', error);
-            });
+    onMounted(() => {
+      userIdFromStore = store.getters.getUserId
+      
+      if (userIdFromStore) {
+        // get user
+        axios
+          .get(`https://jsonplaceholder.typicode.com/users/${userIdFromStore}`)
+          .then((response) => {
+            user_.value = response.data;
+          })
+          .catch((error) => {
+            console.error("Data can not fetch:", error);
+          });
 
-          // get user's todos
-          axios.get(`https://jsonplaceholder.typicode.com/users/${userId}/todos`)
-          .then(response => {
+        // get user's todos
+        axios
+          .get(
+            `https://jsonplaceholder.typicode.com/users/${userIdFromStore}/todos`
+          )
+          .then((response) => {
             todos_.value = response.data;
           })
-          .catch(error => {
-            console.error('Data can not fetch:', error);
+          .catch((error) => {
+            console.error("Data can not fetch:", error);
           });
-        }
-      });
+      }
+    });
 
-      return {
-        user_,
-        todos_,
-      };
-    },
-}
+    return {
+      user_,
+      todos_,
+      userIdFromStore,
+    };
+  },
+  
+};
 </script>
 
-
-
 <template>
-    <div class="h-screen flex flex-row">
-        <div class="w-1/6">
-            <div class="bg-border h-full">
-              <!-- <div class="flex flex-row justify-center items-center justify-items-center">
-                <div id="user-picture" class="flex justify-start">
-                  <img class="w-16 h-16 rounded-full" src="https://randomuser.me/api/portraits/med/men/11.jpg" alt="">
-                </div>
-                <div>
-                  <div id="user-name" class="font-bold">
-                    {{user_.name}}
-                  </div>
-                  <div class="text-sm font-light">
-                    {{user_.email}}
-                  </div>
-                </div>
-              </div> -->
-              <SideBar/>
+  <div class="h-screen flex flex-row">
+    <div class="w-1/6">
+      <div class="bg-border h-full">
+        <div
+          class="flex flex-row justify-center items-center justify-items-center"
+        >
+          <div id="user-picture" class="flex justify-start">
+            <img
+              class="w-16 h-16 rounded-full"
+              src="https://randomuser.me/api/portraits/med/men/11.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <div id="user-name" class="font-bold">
+              {{ user_?.name }}
             </div>
+            <div class="text-sm font-light">
+              {{ user_?.email }}
+            </div>
+          </div>
         </div>
-        
-        <div class=" w-5/6 border-border border-l-2 px-6">
-            <div @click="navigateToOtherPage" class="flex items-center gap-x-4 text-xl font-semibold text-title py-6">
-              <ArrowLeft/>
-              Go Home
-            </div>
-            <div class="container flex flex-col h-4/5 px-4 overflow-y-auto">
-              <CheckBox v-for="todo_ in todos_" :key="todo_.id" :todo="todo_"/>
-            </div>
-        </div>
+        <SideBar />
+      </div>
     </div>
-    
+
+    <div class="w-5/6 border-border border-l-2 px-6">
+      <div
+        @click="navigateToOtherPage"
+        class="flex items-center gap-x-4 text-xl font-semibold text-title py-6"
+      >
+        <ArrowLeft />
+        Go Home
+      </div>
+      <div class="container flex flex-col h-4/5 px-4 overflow-y-auto">
+        <CheckBox v-for="todo_ in todos_" :key="todo_.id" :todo="todo_" />
+      </div>
+    </div>
+  </div>
 </template>
 
-
-
-<style scoped> 
-
-</style>
+<style scoped></style>

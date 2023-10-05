@@ -4,20 +4,16 @@
     import PostIcon from './icons/Post.vue'
     import AlbumIcon from './icons/Album.vue'
     import { ref } from 'vue';
-    import { computed } from 'vue';
+
 
     export default {
-    components: {
-        UserIcon,
-        TodoIcon,
-        PostIcon,
-        AlbumIcon,
-    },
+
     setup() {
         const showUsersButton = ref(true);
         const showTodosButton = ref(true);
         const showPostsButton = ref(true);
         const showAlbumsButton = ref(true);
+
 
         return {
         showUsersButton,
@@ -25,6 +21,15 @@
         showPostsButton,
         showAlbumsButton,
         };
+    },
+    components: {
+        UserIcon,
+        TodoIcon,
+        PostIcon,
+        AlbumIcon,
+    },
+    methods:{
+        
     },
 };
 </script>

@@ -2,7 +2,7 @@
   import Pin from './icons/Pin.vue'
   import Company from './icons/Company.vue'
   import Website from './icons/Website.vue'
-  import { ref, onMounted} from 'vue'
+  import { useStore } from 'vuex';
 
   export default {
     props: {
@@ -15,9 +15,12 @@
     },
     methods: {
       navigateToOtherPage() {
+        
+        this.$store.dispatch('setUserId', this.user.id);
         this.$router.push({ name: 'Todos', params: { id: this.user.id }});
       }
     },
+    
   };
 
 </script>
