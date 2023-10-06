@@ -88,10 +88,11 @@ export default {
 
     <div class="w-5/6 border-border border-l-2 px-6">
       <div
-        @click="navigateToOtherPage"
         class="flex items-center gap-x-4 text-xl font-semibold text-title py-6"
       >
-        <ArrowLeft />
+        <div @click="navigateToOtherPage">
+          <ArrowLeft />
+        </div> 
         Go Home
       </div>
       <div class="container flex flex-col h-4/5 px-4 overflow-y-auto">

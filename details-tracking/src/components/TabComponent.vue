@@ -5,7 +5,7 @@
     import AlbumIcon from './icons/Album.vue'
     import { ref, onMounted } from "vue";
     import { useStore } from 'vuex';
-import router from '../router';
+    import router from '../router';
 
 
     export default {

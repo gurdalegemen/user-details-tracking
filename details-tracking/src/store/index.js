@@ -2,24 +2,25 @@ import { createStore } from 'vuex';
 
 const store = createStore({
     state: {
-        userId: null
+        userId: null,
+        post: null
     },
     mutations: {
-    setUserId(state, userId) {
-        state.userId = userId;
-    },
+        setUserId(state, userId) {
+            state.userId = userId;
+        },
     },
     
     actions: {
-    setUserId({ commit }, userId) {
-        commit('setUserId', userId);
-    },
+        setUserId({ commit }, userId) {
+            commit('setUserId', userId);
+        },
     },
     
     getters: {
-    getUserId(state) {
-        return state.userId;
-    },
+        getUserId(state) {
+            return state.userId;
+        },
     },
 });
 
