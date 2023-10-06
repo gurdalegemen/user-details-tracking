@@ -95,7 +95,7 @@ import axios from 'axios';
                     </div>
                 </div>
                 <div class="w-2/5 bg-white"> <!-- alt sağ -->
-                    <p class="font-semibold text-sm pb-2"> Comments</p>
+                    <p class="font-semibold text-xl pb-2">Comments</p>
                     <CommentCard v-for="comment_ in comments_" :key="comment_.id" :comment="comment_"/>
                 </div>
             </div>
