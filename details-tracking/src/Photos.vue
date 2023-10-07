@@ -14,20 +14,21 @@ export default {
     ArrowLeft,
   },
   methods: {
-    navigateToOtherPage() {
-      this.$router.push({ name: "Home" });
+    navigateToAlbumsPage(){
+      this.$router.back();
     },
   },
   setup() {
     const store = useStore();
     const user_ = ref(null);
-    const albums_ = [];
+    const photos_ = [];
     const dataLoaded = ref(true);
-    const album_photos = reactive([]);
     let userIdFromStore = ref(null);
+    let albumIdFromStore = ref(null);
 
     onMounted(() => {
         userIdFromStore = store.getters.getUserId
+        albumIdFromStore = store.getters.getAlbumId
       
         if (userIdFromStore) {
             // get user
@@ -39,23 +40,12 @@ export default {
                 console.error("Data can not fetch:", error);
             });
 
-            // get user's albums
-            axios.get(`https://jsonplaceholder.typicode.com/users/${userIdFromStore}/albums`)
+            // get albums' photos
+            axios.get(`https://jsonplaceholder.typicode.com/albums/${albumIdFromStore}/photos`)
             .then((response) => {
-                albums_.value = response.data;
-                if(albums_)
-                {
-                  for (const album of albums_.value) {
-                    axios.get(`https://jsonplaceholder.typicode.com/albums/${album.id}/photos?_start=0&_limit=4`)
-                    .then((response =>{ 
-                        album_photos.push({id:album.id, title:album.title, photos:response.data});
-                    }))
-                    .catch((error) => {
-                        console.error("Data can not fetch:", error);
-                    })  
-                  }
-                }
+                photos_.value = response.data;
                 
+                console.log(photos_)
                 dataLoaded.value = false;
             })
             .catch((error) => {
@@ -67,8 +57,7 @@ export default {
 
     return {
       user_,
-      albums_,
-      album_photos,
+      photos_,
       userIdFromStore,
       dataLoaded,
     };
@@ -106,18 +95,20 @@ export default {
       <div
         class="flex items-center gap-x-4 text-xl font-semibold text-title py-6"
       >
-        <div @click="navigateToOtherPage">
+        <div @click="navigateToAlbumsPage">
           <ArrowLeft/>
         </div>
-        Go Home
+        Go Albums
       </div>
       <div class="container flex flex-col h-4/5 px-4 overflow-y-auto">
-          <div v-if="dataLoaded">
-            Loading..
-          </div>
-          <div v-else class="grid w-full grid-cols-3 gap-8">
-            <AlbumCard v-for="album in album_photos" :key="album.id" :album="album"/>
-          </div>
+            <div v-if="dataLoaded">
+                Loading
+            </div>
+            <div v-else class="grid w-full grid-cols-10 gap-8">
+                <div v-for="photo in photos_.value" :key="photo.id">
+                    <img :src="photo.url" :alt="photo.title">
+                </div>
+            </div>
       </div>
     </div>
   </div>
