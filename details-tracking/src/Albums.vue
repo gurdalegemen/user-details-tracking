@@ -1,5 +1,5 @@
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import axios from 'axios'
 import SideBar from './components/SideBarComponent.vue'
 import AlbumCard from './components/AlbumCardComponent.vue'
@@ -22,7 +22,8 @@ export default {
     const store = useStore();
     const user_ = ref(null);
     const albums_ = [];
-    const album_photos =[];
+    const dataLoaded = ref(true);
+    const album_photos = reactive([]);
     let userIdFromStore = ref(null);
 
     onMounted(() => {
@@ -42,22 +43,24 @@ export default {
             axios.get(`https://jsonplaceholder.typicode.com/users/${userIdFromStore}/albums`)
             .then((response) => {
                 albums_.value = response.data;
-
-                for (const album of albums_.value) {
+                if(albums_)
+                {
+                  for (const album of albums_.value) {
                     axios.get(`https://jsonplaceholder.typicode.com/albums/${album.id}/photos?_start=0&_limit=4`)
                     .then((response =>{ 
                         album_photos.push({id:album.id, title:album.title, photos:response.data});
                     }))
                     .catch((error) => {
                         console.error("Data can not fetch:", error);
-                    })   
+                    })  
+                  }
                 }
                 
+                dataLoaded.value = false;
             })
             .catch((error) => {
                 console.error("Data can not fetch:", error);
             });
-           
            
         }
     });
@@ -67,6 +70,7 @@ export default {
       albums_,
       album_photos,
       userIdFromStore,
+      dataLoaded,
     };
   },
   
@@ -108,7 +112,22 @@ export default {
         Go Home
       </div>
       <div class="container flex flex-col h-4/5 px-4 overflow-y-auto">
-            <AlbumCard v-for="album in album_photos" :title="album_photos.title" :photos="album_photos.photos"/>
+          <div v-if="dataLoaded">
+            Loading..
+          </div>
+          <div v-else class="grid w-full grid-cols-3 gap-8">
+            <AlbumCard
+            v-for="album in album_photos" :key="album.id" :album="album">
+              <div class="box-border border-2 rounded-md border-border flex flex-col px-4 pt-4 hover:shadow-xl hover:cursor-pointer">
+                <div class="grid grid-cols-2 grid-rows-2 mb-2">
+                  <div v-for="item in album.photos" :key="item.id">
+                    <img class="h-full w-full" :src="item.thumbnailUrl" :alt="item.title">
+                  </div>
+                </div>
+                <span class="text-sm pb-2">{{album.title}}</span>
+              </div>
+            </AlbumCard>
+          </div>
       </div>
     </div>
   </div>

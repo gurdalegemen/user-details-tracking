@@ -25,7 +25,7 @@
 </script>
 
 <template>
-  <div @click="navigateToOtherPage" id="user-card" class="box-border h-80 w-full border-2 rounded-md border-border bg-white flex flex-col py-4 hover:shadow-xl">
+  <div @click="navigateToOtherPage" id="user-card" class="box-border h-80 w-full border-2 rounded-md border-border bg-white flex flex-col py-4 hover:shadow-xl hover:cursor-pointer">
     
     <div id="user" class="w-full flex h-2/5 items-center">
 

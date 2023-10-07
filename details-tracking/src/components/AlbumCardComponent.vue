@@ -1,18 +1,14 @@
 <script>
 export default {
     props:{
-        title: String,
-        photos: [],
-    },
+        album: Object,
+    }
 }
 </script>
 
 <template>
-    <div>
-        AlbumCard
-    </div>
+    <slot/>
 </template>
 
 <style scoped>
-
 </style>
