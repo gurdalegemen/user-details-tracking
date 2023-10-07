@@ -30,7 +30,7 @@
     <div id="user" class="w-full flex h-2/5 items-center">
 
       <div id="user-picture" class="w-2/5 flex justify-center">
-        <img class="w-30 h-30 rounded-full" src="https://randomuser.me/api/portraits/med/men/11.jpg" alt="">
+        <img class="w-30 h-30 rounded-full" src="https://randomuser.me/api/portraits/med/men/11.jpg" alt="User Picture">
       </div>
 
       <div id="user-details" class="w-3/5">
