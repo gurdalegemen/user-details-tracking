@@ -15,7 +15,6 @@
             <Footer/>
         </div>
     </div>
-    
 </template>
 
 <style scoped>

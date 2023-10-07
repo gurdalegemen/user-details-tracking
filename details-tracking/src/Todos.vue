@@ -90,7 +90,7 @@ export default {
       <div
         class="flex items-center gap-x-4 text-xl font-semibold text-title py-6"
       >
-        <div @click="navigateToOtherPage">
+        <div class="hover:cursor-pointer" @click="navigateToOtherPage">
           <ArrowLeft />
         </div> 
         Go Home

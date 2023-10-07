@@ -45,7 +45,6 @@ export default {
             .then((response) => {
                 photos_.value = response.data;
                 
-                console.log(photos_)
                 dataLoaded.value = false;
             })
             .catch((error) => {
@@ -95,7 +94,7 @@ export default {
       <div
         class="flex items-center gap-x-4 text-xl font-semibold text-title py-6"
       >
-        <div @click="navigateToAlbumsPage">
+        <div class="hover:cursor-pointer" @click="navigateToAlbumsPage">
           <ArrowLeft/>
         </div>
         Go Albums

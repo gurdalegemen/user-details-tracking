@@ -70,28 +70,32 @@
 
 <template>
     <div class="flex flex-col">
-        <div :style="{ backgroundColor: $route.name === 'Home' ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 mb-5 w-full items-center pl-8">
+        <div :style="{ backgroundColor: $route.name === 'Home' ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 mb-5 w-full items-center justify-normal gap-x-8">
+            <div :style="{ backgroundColor: $route.name === 'Home' ? 'bg-primary' : '#D8D9DD'}" class="bg-primary h-10 w-1.5 rounded-r-md"></div>
             <button v-if="$route.meta.showUsersButton" :style="{ backgroundColor: $route.name === 'Home' ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <UserIcon/>
                 <span class="border-none text-primary">Users</span>
             </button>
         </div>
-        <div @click="navigateToTodos" :style="{ backgroundColor: $route.name === 'Todos' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center pl-8">
+        <div @click="navigateToTodos" :style="{ backgroundColor: $route.name === 'Todos' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center justify-normal gap-x-8">
+            <div :style="{ backgroundColor: $route.name === 'Todos' ? 'bg-primary' : '#D8D9DD'}" class="bg-primary h-10 w-1.5 rounded-r-md"></div>
             <button v-if="$route.meta.showTodosButton" :style="{ backgroundColor: $route.name === 'Todos' ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <TodoIcon/>
                 <span class="border-none text-primary">ToDo</span>
             </button>
         </div>
-        <div @click="navigateToPosts" :style="{ backgroundColor: $route.name === 'Posts' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center pl-8">
+        <div @click="navigateToPosts" :style="{ backgroundColor: $route.name === 'Posts' ? 'white' : '#D8D9DD'}"  class=" flex text-18 mb-5 h-10 w-full items-center justify-normal gap-x-8">
+            <div :style="{ backgroundColor: $route.name === 'Posts' ? 'bg-primary' : '#D8D9DD'}" class="bg-primary h-10 w-1.5 rounded-r-md"></div>
             <button v-if="$route.meta.showPostsButton" :style="{ backgroundColor: $route.name === 'Posts' ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <PostIcon/>
                 <span class="border-none text-primary">Posts</span>
             </button>
         </div>
-        <div @click="navigateToAlbums" :style="{ backgroundColor: url === 'Albums' || url === 'Photos'  ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 w-full items-center pl-8">
+        <div @click="navigateToAlbums" :style="{ backgroundColor: url === 'Albums' || url === 'Photos'  ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 w-full  items-center justify-normal gap-x-8">
+            <div :style="{ backgroundColor: url === 'Albums' || url === 'Photos' ? 'bg-primary' : '#D8D9DD'}" class="bg-primary h-10 w-1.5 rounded-r-md"></div>
             <button v-if="$route.meta.showAlbumsButton" :style="{ backgroundColor: url === 'Albums' || url === 'Photos'  ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <AlbumIcon/>
