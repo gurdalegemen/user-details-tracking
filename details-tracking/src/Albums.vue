@@ -1,14 +1,16 @@
 <script>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import SideBar from "./components/SideBarComponent.vue";
-import ArrowLeft from "./components/icons/Left.vue";
-import { useStore } from "vuex";
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import SideBar from './components/SideBarComponent.vue'
+import AlbumCard from './components/AlbumCardComponent.vue'
+import ArrowLeft from './components/icons/Left.vue'
+import { useStore } from 'vuex'
 
 
 export default {
   components: {
     SideBar,
+    AlbumCard,
     ArrowLeft,
   },
   methods: {
@@ -19,40 +21,51 @@ export default {
   setup() {
     const store = useStore();
     const user_ = ref(null);
-    const albums_ = ref(null);
+    const albums_ = [];
+    const album_photos =[];
     let userIdFromStore = ref(null);
 
     onMounted(() => {
-      userIdFromStore = store.getters.getUserId
+        userIdFromStore = store.getters.getUserId
       
-      if (userIdFromStore) {
-        // get user
-        axios
-          .get(`https://jsonplaceholder.typicode.com/users/${userIdFromStore}`)
-          .then((response) => {
-            user_.value = response.data;
-          })
-          .catch((error) => {
-            console.error("Data can not fetch:", error);
-          });
+        if (userIdFromStore) {
+            // get user
+            axios.get(`https://jsonplaceholder.typicode.com/users/${userIdFromStore}`)
+            .then((response) => {
+                user_.value = response.data;
+            })
+            .catch((error) => {
+                console.error("Data can not fetch:", error);
+            });
 
-        // get user's albums
-        axios
-          .get(
-            `https://jsonplaceholder.typicode.com/users/${userIdFromStore}/albums`
-          )
-          .then((response) => {
-            albums_.value = response.data;
-          })
-          .catch((error) => {
-            console.error("Data can not fetch:", error);
-          });
-      }
+            // get user's albums
+            axios.get(`https://jsonplaceholder.typicode.com/users/${userIdFromStore}/albums`)
+            .then((response) => {
+                albums_.value = response.data;
+
+                for (const album of albums_.value) {
+                    axios.get(`https://jsonplaceholder.typicode.com/albums/${album.id}/photos?_start=0&_limit=4`)
+                    .then((response =>{ 
+                        album_photos.push({id:album.id, title:album.title, photos:response.data});
+                    }))
+                    .catch((error) => {
+                        console.error("Data can not fetch:", error);
+                    })   
+                }
+                
+            })
+            .catch((error) => {
+                console.error("Data can not fetch:", error);
+            });
+           
+           
+        }
     });
 
     return {
       user_,
       albums_,
+      album_photos,
       userIdFromStore,
     };
   },
@@ -95,10 +108,11 @@ export default {
         Go Home
       </div>
       <div class="container flex flex-col h-4/5 px-4 overflow-y-auto">
-        
+            <AlbumCard v-for="album in album_photos" :title="album_photos.title" :photos="album_photos.photos"/>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

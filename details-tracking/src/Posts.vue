@@ -1,11 +1,11 @@
 <script>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import SideBar from "./components/SideBarComponent.vue";
-import ArrowLeft from "./components/icons/Left.vue";
-import Post from "./components/PostBar.vue";
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import SideBar from './components/SideBarComponent.vue';
+import ArrowLeft from './components/icons/Left.vue';
+import Post from './components/PostBar.vue';
 import PostModal from './components/modals/PostDetailModal.vue'
-import { useStore } from "vuex";
+import { useStore } from 'vuex';
 
 
 export default {
