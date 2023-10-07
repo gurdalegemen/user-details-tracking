@@ -7,7 +7,7 @@
 <template>
     <div class="h-full flex flex-col pt-8 justify-between">
         <div class="bg-border">
-            <div class="h-10 items-center">
+            <div :style="{marginTop: $route.name !== 'Home' ? '64px' : '0'}" class="h-10 items-center ">
                 <Tab/>
             </div>
         </div>

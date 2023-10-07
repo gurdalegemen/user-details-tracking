@@ -81,7 +81,7 @@ import axios from 'axios';
     </div>
 
     <PostModal v-if="popupTriggers.buttonTrigger">
-        <div class="box-border border-2 border-border rounded-md bg-white flex flex-col">
+        <div class="box-border border-2 border-border rounded-md pb-5 bg-white flex flex-col">
             <div class="flex h-24 items-center justify-between p-10">
                 <p class="font-medium text-lg">{{post.title}}</p>
                 <div @click="() => TogglePopup('buttonTrigger')">
@@ -89,13 +89,13 @@ import axios from 'axios';
                 </div>
             </div>
             <div class="flex flex-row flex-1"> <!-- alt kısım -->
-                <div class="w-3/5 bg-white overflow-auto"> <!-- alt sol -->
+                <div class="w-3/5 border-r border-border bg-white overflow-auto"> <!-- alt sol -->
                     <div class="p-10 text-left">
                         {{post.body}}
                     </div>
                 </div>
                 <div class="w-2/5 bg-white"> <!-- alt sağ -->
-                    <p class="font-semibold text-xl pb-2">Comments</p>
+                    <p class="font-semibold text-xl pl-5 pb-2">Comments</p>
                     <CommentCard v-for="comment_ in comments_" :key="comment_.id" :comment="comment_"/>
                 </div>
             </div>

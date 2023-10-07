@@ -67,8 +67,8 @@ export default {
 <template>
   <div class="h-screen flex flex-row">
     <div class="w-1/6">
-      <div class="bg-border h-full">
-        <div class="flex flex-row absolute justify-center items-center justify-items-center">
+      <div class="bg-border h-full relative">
+        <div class="flex flex-row absolute justify-center items-center justify-items-center w-full gap-x-4 p-2 mt-4">
           <div id="user-picture" class="flex justify-start">
             <img
               class="w-16 h-16 rounded-full"
@@ -85,7 +85,7 @@ export default {
             </div>
           </div>
         </div>
-        <SideBar />
+        <SideBar /> 
       </div>
     </div>
 

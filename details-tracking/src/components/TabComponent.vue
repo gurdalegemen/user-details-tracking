@@ -15,6 +15,7 @@
         const showTodosButton = ref(true);
         const showPostsButton = ref(true);
         const showAlbumsButton = ref(true);
+        const url = '';
 
         const store = useStore();
         let userIdFromStore = ref(null);
@@ -48,7 +49,11 @@
         navigateToTodos,
         navigateToPosts,
         navigateToAlbums,
+        url,
         };
+    },
+    created() {
+        this.url = this.$route.name;
     },
     components: {
         UserIcon,
@@ -86,8 +91,8 @@
                 <span class="border-none text-primary">Posts</span>
             </button>
         </div>
-        <div @click="navigateToAlbums" :style="{ backgroundColor: $route.name === 'Albums' ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 w-full items-center pl-8">
-            <button v-if="$route.meta.showAlbumsButton" :style="{ backgroundColor: $route.name === 'Albums' ? 'white' : '#D8D9DD'}" 
+        <div @click="navigateToAlbums" :style="{ backgroundColor: url === 'Albums' || url === 'Photos'  ? 'white' : '#D8D9DD'}" class=" flex text-18 h-10 w-full items-center pl-8">
+            <button v-if="$route.meta.showAlbumsButton" :style="{ backgroundColor: url === 'Albums' || url === 'Photos'  ? 'white' : '#D8D9DD'}" 
             class="bg-border flex flex-row gap-x-2">
                 <AlbumIcon/>
                 <span class="border-none text-primary">Albums</span>
