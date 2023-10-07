@@ -19,7 +19,7 @@ export default {
             <img class="h-full w-full" :src="item.thumbnailUrl" :alt="item.title">
             </div>
         </div>
-        <span class="text-sm pb-2">{{album.title}}</span>
+        <span class="text-sm pb-2 truncate">{{album.title}}</span>
     </div>
 </template>
 
